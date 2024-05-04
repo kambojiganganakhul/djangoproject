@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Container Styles */
+        .container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        /* Heading Styles */
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Input Styles */
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Button Styles */
+        .submit-now-btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-now-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Message Styles */
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+
+        /* Payment Method Styles */
+        .payment-method-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .payment-method-input {
+            margin-bottom: 15px;
+        }
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .btn-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Details</h1>
+        <form id="payment-form">
+            <label class="payment-method-label" for="payment-method">Select Payment Method:</label>
+            <select id="payment-method" class="payment-method-input">
+                <option value="card">Credit/Debit Card</option>
+                <option value="netbanking">Net Banking</option>
+            </select>
+
+            <div id="card-details" class="payment-method-input">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" placeholder="Enter your card number" required>
+
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" placeholder="DD-MM-YY" required>
+
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" placeholder="CVV" required>
+
+                <label for="card-holder">Card Holder Name:</label>
+                <input type="text" id="card-holder" name="card-holder" placeholder="Enter your name" required>
+            </div>
+
+            <div id="netbanking-details" class="payment-method-input" style="display: none;">
+                <label for="bank-name">Bank Name:</label>
+                <input type="text" id="bank-name" name="bank-name" placeholder="Enter your bank name" required>
+
+                <label for="account-number">Account Number:</label>
+                <input type="text" id="account-number" name="account-number" placeholder="Enter your account number" required>
+
+                <label for="netbanking-password">Net Banking Password:</label>
+                <input type="password" id="netbanking-password" name="netbanking-password" placeholder="Enter your net banking password" required>
+            </div>
+
+            <div class="btn-container">
+                
+                <a href="{% url 'order' %}">Confirm</a>
+            </div>
+        </form>
+        
+    </div>
+
+    <script>
+        const form = document.getElementById('payment-form');
+        const paymentMethod = document.getElementById('payment-method');
+        const cardDetails = document.getElementById('card-details');
+        const netbankingDetails = document.getElementById('netbanking-details');
+        const message = document.getElementById('message');
+
+        paymentMethod.addEventListener('change', function() {
+            if (paymentMethod.value === 'netbanking') {
+                cardDetails.style.display = 'none';
+                netbankingDetails.style.display = 'block';
+            } else {
+                cardDetails.style.display = 'block';
+                netbankingDetails.style.display = 'none';
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            message.style.display = 'block';
+            form.reset();
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>

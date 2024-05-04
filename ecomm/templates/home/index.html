@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block start %}
+<style>
+    .product-container {
+        background-color:teal; /* Change this to the color you want */
+        padding: 20px; /* Adjust padding as needed */
+    }
+
+    /* Additional styles can go here */
+</style>
+
+<div class="container mt-5 pt-5 product-container">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"><img src="/media/{{ product.product_images.first.image }}"></div>
+                <figcaption class="info-wrap border-top">
+                    <a href="{% url 'get_product' product.slug %}" class="title"><b>{{ product.product_name }}</b></a>
+                    <div class="price mt-2">RS {{ product.price }}.00</div>
+                </figcaption>
+            </figure>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

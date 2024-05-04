@@ -1,0 +1,228 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-container button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Options</h1>
+        <form id="payment-form">
+            <label for="payment-method">Select Payment Method:</label>
+            <select id="payment-method" onchange="toggleFields()">
+                <option value="upi">UPI</option>
+            </select>
+
+            <!-- UPI Input Field -->
+            <input type="text" id="upi-id" name="upi-id" placeholder="Enter UPI ID">
+
+            <div class="btn-container">
+                <button type="button" onclick="confirmPayment()">Confirm Payment</button>
+            </div>
+        </form>
+        <div id="message" class="message">Your order is placed successfully!</div>
+    </div>
+
+    <script>
+        function toggleFields() {
+            var paymentMethod = document.getElementById('payment-method').value;
+            var upiIdField = document.getElementById('upi-id');
+
+            if (paymentMethod === 'upi') {
+                upiIdField.style.display = 'block';
+            } else {
+                upiIdField.style.display = 'none';
+            }
+        }
+
+        function confirmPayment() {
+            var upiId = document.getElementById('upi-id').value;
+            var message = document.getElementById('message');
+
+            message.innerHTML = 'Your order is placed successfully!<br>UPI ID: ' + upiId;
+            message.style.display = 'block';
+        }
+    </script>
+</body>
+</html> {% endcomment %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-container button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Options</h1>
+        <form id="payment-form">
+            <label for="payment-method">Select Payment Method:</label>
+            <select id="payment-method">
+                <option value="buynow">UPI</option>
+                <option value="debit">Debit Card</option>
+                <option value="credit">Credit Card</option>
+                <option value="netbanking">Net Banking</option>
+            </select>
+
+            <div class="btn-container">
+                <button type="button" onclick="handlePaymentSelection()">Confirm Payment</button>
+            </div>
+        </form>
+        
+    </div>
+
+    <script>
+        function handlePaymentSelection() {
+            var paymentMethod = document.getElementById('payment-method').value;
+            if (paymentMethod === 'buynow') {
+                window.location.href = "{% url 'upi' %}";
+            }
+            else if (paymentMethod === 'debit') {
+                window.location.href = "{% url 'net' %}";
+            }
+            else if (paymentMethod === 'credit') {
+                window.location.href = "{% url 'net' %}";
+            }
+            else if (paymentMethod === 'netbanking') {
+                window.location.href = "{% url 'net' %}";
+            }
+        }
+
+        function confirmPayment() {
+            document.getElementById('message').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

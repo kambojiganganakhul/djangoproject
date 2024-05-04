@@ -1,0 +1,172 @@
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Added to Cart</title>
+       <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            margin-bottom: 30px;
+        }
+
+        .order-details h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .order-details p {
+            margin-bottom: 5px;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .btn-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Added to Cart</h1>
+    <div id="productDetails"></div>
+
+    <script>
+        // Retrieve product details from sessionStorage
+        var cartDetails = JSON.parse(sessionStorage.getItem('cartDetails'));
+
+        if (cartDetails) {
+            var productDetailsDiv = document.getElementById('productDetails');
+            productDetailsDiv.innerHTML = `
+                <p>Name: ${cartDetails.name}</p>
+                <p>Price: ${cartDetails.price}</p>
+                <p>Quantity: ${cartDetails.quantity}</p>
+                <p>Size: ${cartDetails.size}</p>
+            `;
+        }
+    </script>
+    <div class="btn-container">
+        <a href="{% url 'buynow' %}">Buynow</a>
+
+    </div>
+</body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Added to Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            margin-bottom: 30px;
+        }
+
+        .order-details h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .order-details p {
+            margin-bottom: 5px;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .btn-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Product Added to Cart</h1>
+    <div class="order-details" id="productDetails">
+        <h2>Product Details</h2>
+        <p>Name: JEANS<span id="productName"></span></p>
+        <p>Price: 599<span id="productPrice"></span></p>
+
+        <p>Size: XL<span id="productSize"></span></p>
+    </div>
+
+    <script>
+        // Retrieve product details from sessionStorage
+        var cartDetails = JSON.parse(sessionStorage.getItem('cartDetails'));
+
+        if (cartDetails) {
+            // Display product details
+            document.getElementById('productName').textContent = cartDetails.name;
+            document.getElementById('productPrice').textContent = 'Rs' + cartDetails.price + '.00';
+
+            document.getElementById('productSize').textContent = cartDetails.size;
+        }
+    </script>
+    <div class="btn-container">
+        <a href="{% url 'buynow' %}">Buynow</a>
+    </div>
+</body>
+</html>

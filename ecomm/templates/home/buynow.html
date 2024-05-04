@@ -1,0 +1,131 @@
+{% block start %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .errorlist {
+            color: red;
+            margin-bottom: 10px;
+        }
+
+        .submit-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .details {
+            margin-top: 20px;
+        }
+
+        .details h4 {
+            margin-bottom: 10px;
+        }
+        .btn-container {
+            text-align: center;
+        }
+
+        .btn-container a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .btn-container a:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>adress</title>
+        <style>
+            .errorlist {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <form method="post" novalidate>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+        {% if submitted_details %}
+        <div class="details">
+            <h1>
+                The submitted details are:
+            </h1>
+            <h4>Name: {{submitted_details.name}}</h4>
+            <h4>Email: {{submitted_details.email}}</h4>
+            <h4>Phone Number: {{submitted_details.phonenumber}}</h4>
+            <h4>adress:{{submitted_details.adress}}</h4>
+        </div>
+        <div class="btn-container">
+            <a href="{% url 'conform' %}">Conform</a>
+            <a href="{% url 'home' %}">Go Back</a>
+        </div>
+        
+        {% endif %}
+    </form>
+    </body>
+
+</html>
+
+{% endblock %}
+
